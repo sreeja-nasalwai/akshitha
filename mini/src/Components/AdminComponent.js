@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../AdminButtons.css'; // Assuming styles are in a CSS file
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminButtons() {
     const [showForm, setShowForm] = useState(false);
@@ -59,86 +59,108 @@ function AdminButtons() {
     };
 
     return (
-        <div>
+        <div className="container my-4">
             {/* Button container for Add, Edit, and Delete Employee */}
-            <div className="button-container">
-                <button onClick={handleAddClick} className="btn add-btn">
+            <div className="d-flex justify-content-between mb-3">
+                <button onClick={handleAddClick} className="btn btn-primary">
                     {showForm ? 'Cancel' : 'Add Employee'}
                 </button>
-                <button onClick={handleEditClick} className="btn edit-btn">
+                <button 
+                    onClick={() => handleEditClick(0)} 
+                    className="btn btn-warning" 
+                    disabled={employeeList.length === 0}>
                     Edit Employee
                 </button>
-                <button onClick={handleDeleteClick} className="btn delete-btn">
-                    Delete Employee
-                </button>
+                {employeeList.length > 0 && (
+                    <button 
+                        onClick={() => handleDeleteClick(0)} 
+                        className="btn btn-danger">
+                        Delete Employee
+                    </button>
+                )}
             </div>
 
             {/* List of Employees */}
-            <ul>
+            <ul className="list-group mb-3">
                 {employeeList.map((emp, index) => (
-                    <li key={index}>
-                        <p>{emp.name} - {emp.designation}</p>
-                        <button onClick={() => handleEditClick(index)} className="btn edit-btn">Edit</button>
-                        <button onClick={() => handleDeleteClick(index)} className="btn delete-btn">Delete</button>
+                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{emp.name} - {emp.designation}</span>
+                        <div>
+                            <button 
+                                onClick={() => handleEditClick(index)} 
+                                className="btn btn-sm btn-outline-warning mx-1">
+                                Edit
+                            </button>
+                            <button 
+                                onClick={() => handleDeleteClick(index)} 
+                                className="btn btn-sm btn-outline-danger">
+                                Delete
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
 
             {/* Conditional rendering of form */}
             {showForm && (
-                <div className="form-container">
-                    <form onSubmit={handleFormSubmit} className="employee-form">
-                        <label>
-                            Name:
+                <div className="card p-4">
+                    <form onSubmit={handleFormSubmit}>
+                        <div className="mb-3">
+                            <label className="form-label">Name:</label>
                             <input
                                 type="text"
                                 name="name"
                                 value={employee.name}
                                 onChange={handleInputChange}
+                                className="form-control"
                                 required
                             />
-                        </label>
-                        <label>
-                            Mobile:
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Mobile:</label>
                             <input
                                 type="text"
                                 name="mobile"
                                 value={employee.mobile}
                                 onChange={handleInputChange}
+                                className="form-control"
                                 required
                             />
-                        </label>
-                        <label>
-                            Age:
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Age:</label>
                             <input
                                 type="number"
                                 name="age"
                                 value={employee.age}
                                 onChange={handleInputChange}
+                                className="form-control"
                                 required
                             />
-                        </label>
-                        <label>
-                            Designation:
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Designation:</label>
                             <input
                                 type="text"
                                 name="designation"
                                 value={employee.designation}
                                 onChange={handleInputChange}
+                                className="form-control"
                                 required
                             />
-                        </label>
-                        <label>
-                            Salary:
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Salary:</label>
                             <input
                                 type="number"
                                 name="salary"
                                 value={employee.salary}
                                 onChange={handleInputChange}
+                                className="form-control"
                                 required
                             />
-                        </label>
-                        <button type="submit" className="btn submit-btn">
+                        </div>
+                        <button type="submit" className="btn btn-success w-100">
                             {employee.name ? 'Update' : 'Submit'}
                         </button>
                     </form>

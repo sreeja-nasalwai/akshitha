@@ -8,6 +8,8 @@ import HomeComponent from './Components/HomeComponent';
 import HeaderComponent from './Components/HeaderComponent';
 import AdminComponent from './Components/AdminComponent';
 import LogoutComponent from './Components/LogoutComponent';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <BrowserRouter>

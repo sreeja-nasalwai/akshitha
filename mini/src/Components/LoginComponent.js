@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../LoginComponent.css'; // Import CSS file for styles
+import { Form, Button, Container, Row, Col, InputGroup } from 'react-bootstrap';
+import { Envelope, Lock } from 'react-bootstrap-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const LoginComponent = () => {
+const NewLoginComponent = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -10,123 +12,81 @@ const LoginComponent = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData && userData.email === formData.email && userData.password === formData.password) {
-      alert('Login Successful!');
-      navigate('/home'); // Navigate to the home or dashboard page
-    } else {
-      alert('Invalid email or password. Please try again.');
+    try {
+      const userData = await JSON.parse(localStorage.getItem('user'));
+      if (userData && userData.email === formData.email && userData.password === formData.password) {
+        alert('Login Successful!');
+        const token = Math.random().toString(36).substring(2, 10);
+        localStorage.setItem('token', token);
+        navigate('/admin');
+      } else {
+        alert('Invalid email or password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error handling login:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 
   return (
-    <div style={styles.backgroundContainer}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>
-          🔑 Log In
-        </h2>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.inputGroup}>
-            <span style={styles.inputIcon}>📧</span>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={styles.input}
-              placeholder="Email"
-              required
-            />
-          </div>
-          
-          <div style={styles.inputGroup}>
-            <span style={styles.inputIcon}>🔒</span>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              style={styles.input}
-              placeholder="Password"
-              required
-            />
-          </div>
+    <Container className='bg-white'>
+      <div>
+      <Row className="justify-content-center mt-5">
+        <Col md={5}>
+          <div className="p-4 bg-white rounded-3 shadow">
+            <h2 className="text-center mb-4 fw-bold">🔑 Log In</h2>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formEmail" className="mb-3">
+                <InputGroup>
+                  <InputGroup.Text>
+                    <Envelope />
+                  </InputGroup.Text>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    required
+                  />
+                </InputGroup>
+              </Form.Group>
 
-          <button type="submit" style={styles.button}>Log In</button>
-        </form>
+              <Form.Group controlId="formPassword" className="mb-3">
+                <InputGroup>
+                  <InputGroup.Text>
+                    <Lock />
+                  </InputGroup.Text>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    required
+                  />
+                </InputGroup>
+              </Form.Group>
+
+              <Button variant="primary" type="submit" className="w-100 fw-semibold">
+                Log In
+              </Button>
+            </Form>
+          </div>
+        </Col>
+      </Row>
       </div>
-    </div>
+      
+    </Container>
   );
 };
 
-const styles = {
-  backgroundContainer: {
-    backgroundImage: 'url("your-background-image-url.jpg")', // Replace with your image URL
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh', // Full viewport height
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    width: '300px',
-    padding: '30px',
-    borderRadius: '10px',
-    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.2)',
-    backgroundColor: '#ffffff',
-    textAlign: 'center',
-  },
-  heading: {
-    fontSize: '28px',
-    color: '#333',
-    marginBottom: '20px',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  inputGroup: {
-    position: 'relative',
-    marginBottom: '15px',
-  },
-  inputIcon: {
-    position: 'absolute',
-    left: '10px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    fontSize: '20px', // Adjust icon size if needed
-    pointerEvents: 'none', // Prevents clicking on the icon
-  },
-  input: {
-    padding: '10px 10px 10px 40px', // Left padding for the icon
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ddd',
-    outline: 'none',
-    width: '100%',
-    boxSizing: 'border-box', // Include padding in width
-  },
-  button: {
-    padding: '10px',
-    fontSize: '18px',
-    borderRadius: '5px',
-    border: 'none',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  },
-};
-
-export default LoginComponent;
+export default NewLoginComponent;

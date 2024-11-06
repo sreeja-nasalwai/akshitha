@@ -22,7 +22,7 @@ const SignComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem('user', JSON.stringify(formData));
-    alert('Sign In Successful and data stored in local storage!');
+    alert('Sign In Successful');
     navigate('/login');
   };
 
