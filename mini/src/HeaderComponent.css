@@ -1,0 +1,38 @@
+.container {
+    width: 100%; /* Full width */
+    max-width: 1200px; /* Optional: sets a maximum width */
+    margin: 0 auto; /* Centers the header */
+    background-color: #98efe5; /* Background color */
+}
+
+.nav {
+    display: flex; /* Use flexbox for horizontal alignment */
+}
+
+.nav-link {
+    text-decoration: none; /* Remove underline */
+    color: #343a40; /* Text color */
+    padding: 10px 15px; /* Padding for links */
+    transition: background-color 0.3s; /* Smooth hover transition */
+}
+
+.nav-link:hover {
+    background-color: #10b1c0; /* Hover background color */
+    border-radius: 5px; /* Rounded corners on hover */
+}
+
+.nav-item {
+    margin-right: 10px; /* Space between links */
+}
+
+.position-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keep header on top */
+}
+
+@media (max-width: 768px) {
+    .nav-link {
+        padding: 8px 12px; /* Adjust padding for mobile */
+    }
+}

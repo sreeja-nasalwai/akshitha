@@ -1,0 +1,28 @@
+/* Footer wrapper styling */
+.footerWrapper {
+    background-color: #b7f3e7; /* Light gray background */
+    padding: 20px 0; /* Padding to create space around the content */
+    color: #333; /* Dark text color */
+    font-family: Arial, sans-serif; /* A clean font */
+    border-top: 1px solid #ddd; /* Light border at the top */
+}
+
+/* Text styling */
+.footerWrapper p {
+    margin: 5px 0; /* Space around the paragraphs */
+    font-size: 16px; /* Font size for readability */
+    line-height: 1.5; /* Line height for readability */
+    color: #555; /* Slightly lighter text color */
+}
+
+/* Center-align text within columns */
+.text-center {
+    text-align: center; /* Centers the content */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 576px) {
+    .footerWrapper p {
+        font-size: 14px; /* Slightly smaller font on small screens */
+    }
+}

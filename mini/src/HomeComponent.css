@@ -1,0 +1,49 @@
+.home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4; /* Light background for the home page */
+}
+
+.header {
+    background-color: #afebeb; /* Darker green for the header */
+    color: rgb(17, 13, 13);
+    padding: 20px 0;
+}
+
+.about, .services, .cta {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgb(255, 255, 255); /* White background for sections */
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+li {
+    margin: 10px 0; /* Space between items */
+}
+
+.cta-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #487980; /* Green button */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
